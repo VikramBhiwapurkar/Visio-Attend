@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- Basic -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <!-- Mobile Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Site Metas -->
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+
+  <title>Personal Details</title>
+
+  <!-- bootstrap core css -->
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+
+  <link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet">
+  <!-- Custom styles for this template -->
+  <link href="css/style.css" rel="stylesheet" />
+</head>
+
+<body class="sub_page">
+  <div class="hero_area">
+    <!-- header section strats -->
+    <header class="header_section">
+      <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg custom_nav-container">
+          <a class="navbar-brand" href="index.html">
+            <img src="images/logo.png" alt="" />
+            <span>
+              Visio-Attend
+            </span>
+          </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav  ">
+              <li class="nav-item ">
+                <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="attendance.html"> Attendance</a>
+              </li>
+              <li class="nav-item active">
+                <a class="nav-link" href="user_details.html"> Details </a>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <div class="custom_menu-btn ">
+              <button>
+                <span class=" s-1">
+
+                </span>
+                <span class="s-2">
+
+                </span>
+                <span class="s-3">
+
+                </span>
+              </button>
+            </div>
+          </div>
+
+        </nav>
+      </div>
+    </header>
+    <!-- end header section -->
+  </div>
+
+  <section class="experience_section layout_padding-top layout_padding2-bottom">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-5">
+          <div class="img-box">
+            <img src="images/user.jpg" alt="">
+          </div>
+        </div>
+        <div class="col-md-7">
+            <div class="container">
+              <div class="heading_container">
+                <h2 style="color: #1a2e35;">
+                  Registered Details
+                </h2>
+              <div style="margin-bottom: 60px;"></div>
+            </div>
+            <div id="personal_details_container">
+                <!-- Personal details will be dynamically added here -->
+            </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- info section -->
+  <section class="info_section ">
+    <div class="info_container layout_padding-top">
+      <div class="container">
+        <div class="info_top">
+          <div class="info_logo">
+            <img src="images/logo.png" alt="" />
+            <span>
+              Visio-Attend
+            </span>
+          </div>
+          <div class="social_box">
+            <a href="#">
+              <img src="images/fb.png" alt="">
+            </a>
+            <a href="#">
+              <img src="images/twitter.png" alt="">
+            </a>
+            <a href="#">
+              <img src="images/linkedin.png" alt="">
+            </a>
+            <a href="#">
+              <img src="images/instagram.png" alt="">
+            </a>
+            <a href="#">
+              <img src="images/youtube.png" alt="">
+            </a>
+          </div>
+        </div>
+
+        <div class="info_main">
+        </div>
+        <div class="row">
+          <div class="col-lg-9 col-md-10 mx-auto">
+            <div class="info_contact layout_padding2">
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- end info section -->
+
+  <!-- footer section -->
+  <footer class="container-fluid footer_section ">
+    <div class="container">
+      <p>
+        &copy; <span id="displayDate"></span> All Rights Reserved
+      </p>
+    </div>
+  </footer>
+  <!-- end  footer section -->
+
+
+  <script src="js/jquery-3.4.1.min.js"></script>
+  <script src="js/custom.js"></script>
+  <style>
+    .user-table {
+        border-collapse: collapse;
+        width: 100%;
+        border: 1px solid #ddd; /* Add border to the table */
+    }
+    .user-table th, .user-table td {
+        border: 1px solid #ddd; /* Add border to table cells */
+        padding: 8px;
+        text-align: left;
+        color: #1a2e35;
+    }
+    .user-table th {
+        background-color: #00bc86;
+    }
+  </style>
+
+  <script>
+    $(document).ready(function(){
+        // Parse CSV file
+        $.ajax({
+            type: "GET",
+            url: "../registered_users.csv",
+            dataType: "text",
+            success: function(data) {
+                var lines = data.split("\n");
+                var html = "<table class='user-table'><thead><tr><th>ID</th><th>Full Name</th><th>Images</th></tr></thead><tbody>";
+                for (var i = 0; i < lines.length; i++) {
+                    var parts = lines[i].split(",");
+                    var id = parts[0];
+                    var name = parts[1];
+                    var link = parts[2];
+                    // Check if link exists before calling trim()
+                    if (link) {
+                        link = link.trim(); // trim to remove whitespace
+                        link = "." + link;
+                    }
+                    html += "<tr>";
+                    html += "<td>" + id + "</td>";
+                    html += "<td>" + name + "</td>";
+                    html += "<td><a href='" + link + "' style='text-decoration: none; color: #ff4f5a;'>Link</a></td>";
+                    html += "</tr>";
+                }
+                html += "</tbody></table>";
+                $("#personal_details_container").html(html);
+            }
+        });
+    });
+  </script>
+</body>
+</html>
